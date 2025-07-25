@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>DeutschPro Einstufungstest – A1 bis C1 (100 Fragen)</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --orange:#ff7a00;
+    --yellow:#ffcc00;
+    --black:#000000;
+    --gray-100:#f7f7f7;
+    --gray-300:#e5e5e5;
+    --gray-600:#666;
+    --maxw:1100px;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family:'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, sans-serif;
+    color:#111;
+    background:#fff;
+  }
+  header{
+    background: linear-gradient(135deg, var(--orange), var(--yellow));
+    color:#000;
+    padding:48px 16px 64px;
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+  }
+  header::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:radial-gradient(circle at 80% 20%, rgba(255,255,255,.15), transparent 60%);
+    pointer-events:none;
+  }
+  h1{
+    margin:0 0 12px;
+    font-size: clamp(1.8rem, 4.5vw, 3rem);
+    font-weight:800;
+    line-height:1.1;
+  }
+  h2{
+    margin: 32px 0 16px;
+    font-size:1.4rem;
+    font-weight:700;
+    color:var(--orange);
+  }
+  .container{
+    max-width:var(--maxw);
+    margin:-40px auto 80px;
+    background:#fff;
+    box-shadow:0 12px 32px rgba(0,0,0,.08);
+    border-radius:18px;
+    padding:24px;
+  }
+  .intro{
+    margin:0 auto 24px;
+    max-width:800px;
+    line-height:1.6;
+    color:#333;
+  }
+  .badge{
+    display:inline-block;
+    background:#000;
+    color:#fff;
+    font-size:.85rem;
+    padding:4px 10px;
+    border-radius:999px;
+    margin-bottom:10px;
+  }
+  .level-section{
+    border:2px solid var(--gray-300);
+    border-radius:14px;
+    padding:18px 16px;
+    margin-bottom:24px;
+  }
+  .level-header{
+    display:flex;align-items:center;justify-content:space-between;cursor:pointer;
+    padding:4px 0 12px;
+  }
+  .level-header h3{
+    margin:0;
+    font-size:1.15rem;
+    color:#000;
+  }
+  .toggle{
+    border:none;background:var(--orange);color:#fff;border-radius:8px;padding:6px 12px;cursor:pointer;font-weight:600
+  }
+  .question{
+    padding:16px 0;
+    border-bottom:1px dashed var(--gray-300);
+  }
+  .question:last-child{
+    border-bottom:none;
+  }
+  .q-title{
+    font-weight:600;margin-bottom:8px;display:flex;gap:8px;align-items:flex-start;
+  }
+  .answers label{
+    display:block;
+    padding:6px 10px;
+    border-radius:8px;
+    cursor:pointer;
+  }
+  .answers input{
+    margin-right:6px;
+    accent-color: var(--orange);
+  }
+  .answers label:hover{
+    background:var(--gray-100);
+  }
+  .submit-wrap{
+    text-align:center;
+    margin:32px 0 0;
+  }
+  .btn-primary{
+    background:var(--black);
+    color:#fff;
+    padding:14px 26px;
+    border:none;border-radius:12px;
+    font-size:1.05rem;
+    cursor:pointer;
+    transition:.2s;
+  }
+  .btn-primary:hover{
+    background:var(--orange);
+  }
+  .results{
+    margin-top:40px;
+    border-top:3px solid var(--black);
+    padding-top:24px;
+    display:none;
+  }
+  .results h2{
+    color:var(--black);
+  }
+  .score{
+    font-size:2rem;
+    font-weight:800;
+    margin:0 0 8px;
+  }
+  .score small{
+    font-size:.9rem;
+    font-weight:400;
+    color:var(--gray-600);
+  }
+  .level-badge{
+    display:inline-block;
+    background:var(--yellow);
+    color:#000;
+    font-weight:700;
+    padding:6px 12px;
+    border-radius:999px;
+    margin:6px 0 18px;
+  }
+  .details{
+    margin-top:24px;
+  }
+  .details summary{
+    cursor:pointer;
+    font-weight:600;
+    color:var(--orange);
+  }
+  .solution{
+    margin:16px 0;
+    padding:12px 14px;
+    background:#fff8e6;
+    border-left:4px solid var(--orange);
+    font-family:monospace;
+    white-space:pre-wrap;
+    word-break:break-word;
+  }
+  footer{
+    text-align:center;
+    color:#777;
+    font-size:.85rem;
+    padding:32px 0 48px;
+  }
+  .tag{
+    background:var(--orange);
+    color:#fff;
+    border-radius:6px;
+    padding:2px 6px;
+    font-size:.75rem;
+    margin-left:6px;
+    vertical-align:middle;
+  }
+  .hidden{display:none}
+</style>
+</head>
+<body>
+<header>
+  <div class="badge">DeutschPro</div>
+  <h1>Einstufungstest A1–C1<br>🟧⚫🟨</h1>
+  <p>100 Multiple-Choice-Fragen • Modernes UI • Sofortige Auswertung & Lösungen</p>
+</header>
+
+<main class="container">
+  <div class="intro">
+    <p>Willkommen zum <strong>DeutschPro Einstufungstest</strong>! Beantworte alle Fragen (A1 bis C1). Am Ende erhältst du:
+      <br>• deine <strong>Punktzahl</strong> & eine <strong>Niveau-Einschätzung</strong><br>
+      • die <strong>korrekten Lösungen</strong> für jede Frage.
+    </p>
+    <p><em>Tipp:</em> Wenn du dir unsicher bist, überspringe und komm am Ende zurück.</p>
+  </div>
+
+  <!-- LEVEL SECTIONS -->
+  <section class="level-section" data-level="A1-A2">
+    <div class="level-header">
+      <h3>A1–A2 • Grundlagen <span class="tag">Fragen 1–35</span></h3>
+      <button class="toggle" data-target="block">Alles aus-/einblenden</button>
+    </div>
+    <div class="questions">
+      <!-- Questions 1-35 -->
+    </div>
+  </section>
+
+  <section class="level-section" data-level="B1-B2">
+    <div class="level-header">
+      <h3>B1–B2 • Mittelstufe <span class="tag">Fragen 36–70</span></h3>
+      <button class="toggle" data-target="block">Alles aus-/einblenden</button>
+    </div>
+    <div class="questions">
+      <!-- Questions 36-70 -->
+    </div>
+  </section>
+
+  <section class="level-section" data-level="C1">
+    <div class="level-header">
+      <h3>C1 • Fortgeschritten <span class="tag">Fragen 71–100</span></h3>
+      <button class="toggle" data-target="block">Alles aus-/einblenden</button>
+    </div>
+    <div class="questions">
+      <!-- Questions 71-100 -->
+    </div>
+  </section>
+
+  <div class="submit-wrap">
+    <button id="submitBtn" class="btn-primary">📊 Test auswerten</button>
+  </div>
+
+  <section id="results" class="results">
+    <h2>Ergebnis</h2>
+    <p class="score"></p>
+    <div class="level-badge" id="levelBadge"></div>
+    <p id="feedback"></p>
+
+    <details class="details">
+      <summary>✅ Korrekte Lösungen anzeigen</summary>
+      <div class="solution" id="solutionBlock"></div>
+    </details>
+
+    <details class="details">
+      <summary>📋 Deine Antworten & Korrekturen</summary>
+      <div id="corrections"></div>
+    </details>
+  </section>
+</main>
+
+<footer>
+  DeutschPro – Einstufungstest • Farben: Orange • Schwarz • Gelb • © <span id="year"></span>
+</footer>
+
+<script>
+const questionsRaw = [
+/* 1 */  {q:"Ich ___ Studentin.", a:["bin","bist","sind"]},
+/* 2 */  {q:"Woher ___ du?", a:["kommen","kommt","komme"]},
+/* 3 */  {q:"Das ist ___ Haus.", a:["der","die","das"]},
+/* 4 */  {q:"Ich habe ___ Apfel.", a:["ein","eine","einen"]},
+/* 5 */  {q:"Wir ___ morgen ins Kino.", a:["geht","gehe","gehen"]},
+/* 6 */  {q:"Sie spielt gern ___ Fußball. ⚽", a:["–","der","die"]},
+/* 7 */  {q:"Welche Nummer ist richtig?", a:["11:00 – Es ist elf Uhr.","11:00 – Es ist zehn Uhr.","11:00 – Es ist halb elf."]},
+/* 8 */  {q:"Wie spät ist es? – „Es ist Viertel ___ drei.“", a:["vor","nach","um"]},
+/* 9 */  {q:"Ich mag Schokolade ___. 🍫", a:["sehr","nicht","zu"]},
+/*10 */  {q:"Du sollst leiser ___.", a:["sprechen","sprichst","sprach"]},
+
+/*11 */  {q:"___ du Englisch?", a:["lernst","lernen","lernt"]},
+/*12 */  {q:"Ich komme ___.", a:["aus Spanien","von Spanien","zu Spanien"]},
+/*13 */  {q:"Hast du ___ Zeit?", a:["eine","ein","keine"]},
+/*14 */  {q:"Der Hund schläft ___. 🐾", a:["draußen","drinnen","draußen drinnen"]},
+/*15 */  {q:"Er fährt ___ Auto.", a:["das","–","den"]},
+/*16 */  {q:"Wir ___ am Sonntag spazieren.", a:["geht","gehen","gehst"]},
+/*17 */  {q:"Ich ___ gestern ein Buch gelesen.", a:["habe","hatte","bin"]},
+/*18 */  {q:"Sie arbeitet ___ einem Café.", a:["in","bei","auf"]},
+/*19 */  {q:"___ du mir helfen?", a:["Kann","Kannst","Kannet"]},
+/*20 */  {q:"Ich bleibe da, ___ es regnet.", a:["weil","aber","oder"]},
+
+/*21 */  {q:"Er war traurig, ___ der Film interessant war.", a:["aber","weil","und"]},
+/*22 */  {q:"Ich gehe, sobald ich ___ essen habe.", a:["fertig","fertiger","fertigst"]},
+/*23 */  {q:"Die Kinder ___ laut.", a:["spielen","spielt","spielst"]},
+/*24 */  {q:"Während ___ ich schlief, regnete es.", a:["als","wann","ob"]},
+/*25 */  {q:"Sie gab ihm einen Brief, ___ er las ihn.", a:["danach","nachdem","dam"]},
+/*26 */  {q:"Ich möchte ein Glas Wasser, ___.", a:["bitte","bitte sehr","bitte viel"]},
+/*27 */  {q:"Er sucht ___ sein Handy.", a:["nach","zu","mit"]},
+/*28 */  {q:"Wenn du Zeit hast, ___ wir Eis essen. 🍦", a:["gehen","gehen wir","wir gehen"]},
+/*29 */  {q:"Das ist das Kind, ___ Vater Arzt ist.", a:["wessen","dessen","der"]},
+/*30 */  {q:"Ich freue mich, ___ du kommst.", a:["dass","ob","denn"]},
+
+/*31 */  {q:"Je mehr ich übe, ___ besser spreche ich.", a:["desto","als","als desto"]},
+/*32 */  {q:"Er spricht Deutsch, ___ er in Deutschland ist.", a:["weil","obwohl","damit"]},
+/*33 */  {q:"Hättest du Zeit, ___ du mir helfen?", a:["werde","würdest","wirst"]},
+/*34 */  {q:"Wir freuen uns ___ deinen Besuch.", a:["auf","über","mit"]},
+/*35 */  {q:"Kaum hatte ich gegessen, ___ rief sie an.", a:["da","wenn","weil"]},
+
+/*36 */  {q:"Plusquamperfekt: Ich ___ schon gearbeitet.", a:["hatte","habe","war"]},
+/*37 */  {q:"Relativsatz: Das Buch, ___ du liest, ist spannend.", a:["was","das","welcher"]},
+/*38 */  {q:"Konj II: Wenn ich mehr Zeit hätte, ___ ich reisen.", a:["würde","wurde","werde"]},
+/*39 */  {q:"Passiv: Der Brief ___ morgen geschrieben.", a:["wird","wird sein","wurde"]},
+/*40 */  {q:"Subjektive Meinung: Ich bin der Meinung, ___...", a:["dass","ob","dass ich"]},
+/*41 */  {q:"Kausalsatz: Er kommt nicht, ___ er krank ist.", a:["weil","obwohl","damit"]},
+/*42 */  {q:"Finalsatz: Ich lerne Deutsch, ___ ich in Deutschland arbeiten kann.", a:["damit","weil","um...zu"]},
+/*43 */  {q:"Konzessiv: ___ es regnet, gehen wir spazieren.", a:["Weil","Obwohl","Wenn"]},
+/*44 */  {q:"„… je mehr ... desto ...“ – welches Wort gehört in den 2. Teil?", a:["desto","wenn","je"]},
+/*45 */  {q:"Modalitätsausdruck: Ich habe Angst, ___ zu kommen.", a:["nicht","nicht zu","zu"]},
+
+/*46 */  {q:"Konjunktiv I: Er sagte, er ___ morgen kommt.", a:["würde","kommt","müsse"]},
+/*47 */  {q:"Indirekte Rede: Sie meinte, sie habe kein Geld.", a:["habe","hat","hätte"]},
+/*48 */  {q:"„als“ vs „wenn“: ___ ich Kind war, spielte ich viel.", a:["Wenn","Als","Weil"]},
+/*49 */  {q:"Er denkt, ___ er recht hat.", a:["weil","dass","ob"]},
+/*50 */  {q:"Infinitivsatz mit „zu“: Ich verspreche, ___ pünktlich zu sein.", a:["zu","sein","ich"]},
+/*51 */  {q:"„sofort“, „gleich“ oder „direkt“ – am angemessensten (neutral)?", a:["sofort","gleich","direkt"]},
+/*52 */  {q:"Doppelkonnektor: „sowohl … ___ … als auch“", a:["wie","oder","und"]},
+/*53 */  {q:"„hatten geschlafen“ – das ist:", a:["Perfekt","Plusquamperfekt","Futur II"]},
+/*54 */  {q:"„Ich erinnere mich daran, ___ ich dich traf.“", a:["dass","ob","wann"]},
+/*55 */  {q:"„Er hat mir geholfen, ___ ich krank war.“", a:["als","wenn","während"]},
+
+/*56 */  {q:"Modalverb + Infinitiv ohne „zu“: Er möchte ___ lernen.", a:["Spanisch","Spanisch zu","Spanisch lernen"]},
+/*57 */  {q:"Konditional: Wenn ich im Lotto gewänne, ___ ich reich.", a:["werde","wäre","wäre gewesen"]},
+/*58 */  {q:"„sich freuen auf“ vs „über“: Ich freue mich ___ deinen Besuch.", a:["über","auf","wegen"]},
+/*59 */  {q:"Verbzweit: Ich weiß nicht, ___ er kommt.", a:["wenn","ob","dass"]},
+/*60 */  {q:"Passiversatzform: Der Kuchen lässt sich leicht ___.", a:["essen","gegessen","gegessen werden"]},
+/*61 */  {q:"Relativsatz mit Präposition: Der Mann, ___ ich helfe, ist sehr nett.", a:["wem","den","dem"]},
+/*62 */  {q:"Wortbildung: „Unabhängigkeit“ bedeutet:", a:["Abhängigkeit","ohne Abhängigkeit","Gegenteilig"]},
+/*63 */  {q:"Konj II Vergangenheit: Wenn du gekommen ___, hätten wir gefeiert.", a:["waren","wärest","gewesen"]},
+/*64 */  {q:"Ausdruck „je nachdem“ nutzt man, wenn ...", a:["abhängend","unklar","je nach Situation"]},
+/*65 */  {q:"Temporalsatz: Ich bleibe zu Hause, ___ du anrufst.", a:["wenn","ob","als"]},
+/*66 */  {q:"Mir ist klar, ___ du Recht hattest.", a:["dass","ob","denn"]},
+/*67 */  {q:"Wortstellung: Er hat angekündigt, dass sie ___ kommen wird.", a:["schon","noch","bald"]},
+/*68 */  {q:"Verbalisierung: Er bedauert, ___ ich nicht früher gekommen bin.", a:["dass","ob","wenn"]},
+/*69 */  {q:"Komparativ-Superlativ: Er ist ___ als sein Bruder.", a:["größer","am größten","groß"]},
+/*70 */  {q:"„je früher ... desto besser“ – ergänze:", a:["früher","desto besser","je"]},
+
+/*71 */  {q:"Kaum hatte ich gegessen, ___ rief er an.", a:["da","als","weil"]},
+/*72 */  {q:"Nominalstil: „Er kam schnell“ →", a:["Seine schnelle Ankunft","Sein schnelles Kommen","Sein schneller Kommt"]},
+/*73 */  {q:"Partizipialkonstruktion: Lächelnd ___ er den Raum.", a:["betrat","trat","betretend"]},
+/*74 */  {q:"Nominalisierung: „entscheiden“ →", a:["Entscheidung","Entscheid","Entscheiden"]},
+/*75 */  {q:"Verb mit Präposition: ___ Erfolg hat.", a:["zum","zu","nach"]},
+/*76 */  {q:"Partizip II als Adjektiv: Die Tür ist ___ (geschlossen).", a:["geschlossen","schließend","geschlossenes"]},
+/*77 */  {q:"„Indem“-Konstruktion: Er lernt Deutsch, ___ er viel liest.", a:["indem","weil","während"]},
+/*78 */  {q:"Passiv Perfekt: Der Satz ___ gelesen worden.", a:["ist","wurde","wird"]},
+/*79 */  {q:"Relativsatz im Genitiv: Das Buch, ___ Titels wir sprachen, war spannend.", a:["dessen","deren","dessen wir"]},
+/*80 */  {q:"Nomen-Verb-Verbindung: Er nimmt ___ Rücksicht auf andere.", a:["Rücksicht","Rucksicht","Rücksichten"]},
+/*81 */  {q:"„je ... umso ...“ im Konjunktiv: Je mehr du lernst, ___ du besser wirst.", a:["umso","desto","als desto"]},
+/*82 */  {q:"Passiv-Variante: Das Problem lässt sich leicht ___.", a:["lösen","gelöst werden","gelöst"]},
+/*83 */  {q:"Substantivierung korrekt:", a:["Das Reisen macht Spaß.","Reisen macht Spaß.","Das zu Reisende macht Spaß."]},
+/*84 */  {q:"Konjunktiv I in Bericht: Er sagte, sie ___ krank sei.", a:["ist","sei","wäre"]},
+/*85 */  {q:"„wohingegen“ korrekt benutzt:", a:["Er liebt Sommer, wohingegen er Winter hasst.","wogegen","während"]},
+/*86 */  {q:"„je nachdem … wie“ korrekt:", a:["je nachdem, was du willst","je nach dem, was du willst","je nachdem du willst"]},
+/*87 */  {q:"Genitivobjekt: Er schämt sich ___ seiner Fehler.", a:["über","wegen","um"]},
+/*88 */  {q:"Präp + Relativ: Der Ort, ___ ich denke, ist weit.", a:["an den","an dem","wo"]},
+/*89 */  {q:"Unregelmäßig Partizip II: er hat geschrieben → er ___ geschrieben.", a:["habe","hat","hätte"]},
+/*90 */  {q:"Stilvariation: „Es ist offensichtlich“ =", a:["Es ist offenkundig","Es ist offensichtlichse","Es ist offenkundiger"]},
+/*91 */  {q:"Modalpartikel-Kombi: ___ mal vorbei!", a:["Komm doch","Komm mal","Komm ganz"]},
+/*92 */  {q:"Feinheit: „eher“ vs „lieber“: Ich würde ___ gehen als bleiben.", a:["eher","lieber","obwohl"]},
+/*93 */  {q:"Connecting adverb: Es hat geregnet, ___ wir gingen spazieren.", a:["deswegen","dennoch","trotzdem"]},
+/*94 */  {q:"Konsekutivsatz: Er arbeitet so hart, ___ er müde ist.", a:["dass","sodass","als dass"]},
+/*95 */  {q:"„wessen“ vs „deren“: Der Mann, ___ Auto kaputt ist.", a:["dessen","deren","wessen"]},
+/*96 */  {q:"Verb + Präp: sich erinnern: Ich erinnere mich ___ ihn.", a:["über","an","bei"]},
+/*97 */  {q:"Größenvergleich: Ich bin nicht so ___ wie du.", a:["stark","stärker","am stärksten"]},
+/*98 */  {q:"„unabhängig davon“ Konstruktion: ___ seines Alters ist er fit.", a:["Unabhängig","Trotz","Wegen"]},
+/*99 */  {q:"Konjunktiv II Vergangenheit: Wenn er gekommen ___, wären wir glücklich gewesen.", a:["wäre","wäre gewesen","wäre gewesen wäre"]},
+/*100*/ {q:"Nominalstil komplex: Die ___ Teilnahme war erfreulich.", a:["gemeinsame","gemeinsam","Gemeinsame Teilnahme"]},
+];
+
+const solutions = [
+ // 1-10
+ "a","a","c","a","c","a","a","b","a","a",
+ // 11-20
+ "a","a","c","a","b","b","a","b","b","a",
+ // 21-30
+ "a","a","a","a","b","a","a","b","b","a",
+ // 31-35
+ "a","a","b","a","a",
+ // 36-45
+ "a","b","a","a","a","b","a","b","a","b",
+ // 46-55
+ "b","a","b","b","a","a","c","a","b","a",
+ // 56-65
+ "a","b","b","b","a","a","b","b","a","a",
+ // 66-70
+ "a","c","b","a","b",
+ // 71-80
+ "a","b","a","a","a","a","a","a","a","a",
+ // 81-90
+ "b","a","a","b","a","a","a","a","b","a",
+ // 91-100
+ "a","b","c","b","a","b","a","a","a","a"
+];
+
+// sanity check length
+if(solutions.length !== 100) console.warn("Solutions length != 100", solutions.length);
+
+const levels = [
+  {range:[1,35], selector:'[data-level="A1-A2"] .questions'},
+  {range:[36,70], selector:'[data-level="B1-B2"] .questions'},
+  {range:[71,100], selector:'[data-level="C1"] .questions'}
+];
+
+function renderQuestions(){
+  levels.forEach(({range, selector})=>{
+    const [start,end] = range;
+    const wrap = document.querySelector(selector);
+    for(let i=start;i<=end;i++){
+      const idx = i-1;
+      const q = questionsRaw[idx];
+      const el = document.createElement('div');
+      el.className = 'question';
+      el.dataset.q = i;
+      el.innerHTML = `
+        <div class="q-title"><span>#${i}.</span> <span>${escapeHTML(q.q)}</span></div>
+        <div class="answers">
+          ${q.a.map((opt,j)=>{
+            const letter = ['a','b','c'][j];
+            const name = `q${i}`;
+            const id = `q${i}_${letter}`;
+            return `
+              <label for="${id}">
+                <input id="${id}" type="radio" name="${name}" value="${letter}" />
+                <strong>${letter})</strong> ${escapeHTML(opt)}
+              </label>`;
+          }).join('')}
+        </div>
+      `;
+      wrap.appendChild(el);
+    }
+  });
+}
+
+function escapeHTML(str){
+  return str.replace(/[&<>"']/g, s => ({
+    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'
+  }[s]));
+}
+
+function evaluate(){
+  const total = questionsRaw.length;
+  let correct = 0;
+  const userAnswers = [];
+  const mistakes = [];
+
+  for(let i=1;i<=total;i++){
+    const selected = document.querySelector(`input[name="q${i}"]:checked`);
+    const ans = selected ? selected.value : null;
+    userAnswers.push(ans);
+    const right = solutions[i-1];
+    if(ans === right){
+      correct++;
+    }else{
+      mistakes.push({i, ans, right});
+    }
+  }
+
+  const scorePercent = Math.round((correct/total)*100);
+  const lvl = detectLevel(correct);
+
+  // UI
+  const resEl = document.getElementById('results');
+  resEl.style.display = 'block';
+  document.querySelector('.score').innerHTML = `${correct} / ${total} <small>(${scorePercent}%)</small>`;
+  document.getElementById('levelBadge').textContent = `Eingestuft: ${lvl}`;
+  document.getElementById('feedback').textContent = levelFeedback(lvl);
+
+  // solutions block
+  const solLines = solutions.map((s,i)=>`${i+1}: ${s}`).join(', ');
+  document.getElementById('solutionBlock').textContent = solLines;
+
+  // corrections
+  const cor = document.getElementById('corrections');
+  cor.innerHTML = '';
+  if(mistakes.length === 0){
+    cor.innerHTML = '<p>🎉 Perfekt! Alle Antworten korrekt.</p>';
+  }else{
+    const list = document.createElement('ol');
+    mistakes.forEach(m=>{
+      const li = document.createElement('li');
+      li.innerHTML = `Frage <strong>${m.i}</strong>: Deine Antwort: <code>${m.ans ?? '—'}</code> · Richtig: <code>${m.right}</code>`;
+      list.appendChild(li);
+    });
+    cor.appendChild(list);
+  }
+  scrollTo(resEl);
+}
+
+function detectLevel(points){
+  // einfache Heuristik analog zu vorheriger Empfehlung
+  if(points <= 10) return "A1";
+  if(points <= 20) return "A2";
+  if(points <= 27) return "B1";
+  if(points <= 35) return "B2 (Beginn)";
+  if(points <= 50) return "B2";
+  if(points <= 80) return "C1 (stark)";
+  return "C1+";
+}
+function levelFeedback(lvl){
+  switch(lvl){
+    case "A1": return "Du solltest mit den Grundlagen (A1) starten.";
+    case "A2": return "Solide Basis! Starte bei A2 oder wiederhole A1/A2 gezielt.";
+    case "B1": return "Gute Mittelstufe. Ein B1-Kurs wäre passend.";
+    case "B2 (Beginn)": return "Oberstufe beginnt – B2-Kurs ist sinnvoll.";
+    case "B2": return "Stark! Arbeite an Feinheiten auf B2/C1-Niveau.";
+    case "C1 (stark)": return "Sehr gut! Du liegst im oberen Bereich – C1 passt.";
+    case "C1+": return "Exzellent! Du bist sehr weit – Feinschliff auf C1/C2.";
+    default: return "";
+  }
+}
+
+function scrollTo(el){
+  el.scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+document.getElementById('submitBtn').addEventListener('click', evaluate);
+
+document.querySelectorAll('.toggle').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const section = btn.closest('.level-section');
+    const qWrap = section.querySelector('.questions');
+    const isHidden = qWrap.classList.toggle('hidden');
+    btn.textContent = isHidden ? 'Alles einblenden' : 'Alles ausblenden';
+  });
+});
+
+document.getElementById('year').textContent = new Date().getFullYear();
+
+renderQuestions();
+</script>
+</body>
+</html>
